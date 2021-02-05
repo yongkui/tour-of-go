@@ -13,13 +13,17 @@ func sum(s []int, c chan int) {
 
 func main() {
 	s := []int{7, 2, 8, -9, 4, 0}
+	
 	c := make(chan int)
 	fmt.Println("in-main: c addr:", &c)
+	
 	go sum(s[:len(s)/2], c)
+	
 	go sum(s[len(s)/2:], c)
+	
 	x := <-c
 	fmt.Println(x, &c)
+	
 	y := <-c
 	fmt.Println(y, &c)
 }
-
